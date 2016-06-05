@@ -49,8 +49,11 @@ class WebServerTest(RequestTest):
 class RestTest(RequestTest):
     def version_test(self):
         resp = self.fetch_json('/api/v1/version')
-        print(resp)
         self.assertEqual(resp['version'], '1.0')
+
+    def other_test(self):
+        resp = self.fetch_json('/api/v1/other')
+        self.assertEqual(resp['other'], 0)
 
 if __name__ == '__main__':
     unittest.main()

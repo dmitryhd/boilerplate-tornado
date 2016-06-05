@@ -1,0 +1,3 @@
+recursive-include web_server *
+include web_server/static/*
+include web_server/templates/*
