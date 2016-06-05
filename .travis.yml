@@ -2,6 +2,9 @@ language: python
 python:
     - "3.4"
 before_install:
-    - pip install nose tornado
+    - pip install nose
+    - pip install coveralls
 script:
     - nosetests
+after_success:
+    - coveralls
