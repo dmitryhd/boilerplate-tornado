@@ -21,10 +21,16 @@ class IndexHandler(web.RequestHandler):
         self.render('index.html')
 
 
+class RestApiHandler(web.RequestHandler):
+    def get(self):
+        self.write({'version': '1.0'})
+
+
 def get_app() -> web.Application:
     """ Sets up routing"""
     routing = [
         (r"/", IndexHandler),
+        (r"/api/v1/version", RestApiHandler),
         (r"/static/(.*)", web.StaticFileHandler, {"path": STATIC_PATH}),
     ]
     app = web.Application(routing)
