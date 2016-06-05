@@ -37,22 +37,22 @@ class TestRequest(AsyncHTTPTestCase):
 
 
 class WebServerTest(TestRequest):
-    def static_test(self):
+    def test_static(self):
         resp = self.fetch('/static/style.css')
         self.assertEqual(resp.code, 200)
 
-    def page_render_test(self):
+    def test_page_render(self):
         body = self.fetch_html('/')
         self.assertIn('<!DOCTYPE html>', body)
 
 
 
 class TestRest(TestRequest):
-    def version_test(self):
+    def test_version(self):
         resp = self.fetch_json('/api/v1/version')
         self.assertEqual(resp['version'], '1.0')
 
-    def other_test(self):
+    def test_other(self):
         resp = self.fetch_json('/api/v1/other')
         self.assertEqual(resp['other'], 0)
 
