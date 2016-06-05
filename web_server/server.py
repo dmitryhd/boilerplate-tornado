@@ -1,21 +1,24 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-""" """
 import os.path
 import tornado.ioloop
 import tornado.web as web
 
+__author__ = "Dmitry Khodakov <dmitryhd@gmail.com>"
+
 
 PORT = 8888
 
-STATIC_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                           'static/')
+APP_PATH = os.path.dirname(os.path.abspath(__file__))
+STATIC_PATH = os.path.join(APP_PATH, 'static/')
+TEMPLATE_PATH = os.path.join(APP_PATH, 'templates/')
 
 
 class IndexHandler(web.RequestHandler):
     def get(self):
-        self.write('a')
+        # self.write('aaa')
+        self.render('index.html')
 
 
 def get_app() -> web.Application:
@@ -25,6 +28,7 @@ def get_app() -> web.Application:
         (r"/static/(.*)", web.StaticFileHandler, {"path": STATIC_PATH}),
     ]
     app = web.Application(routing)
+    app.settings['template_path'] = TEMPLATE_PATH
     return app
 
 
@@ -35,5 +39,4 @@ def start_server():
 
 
 if __name__ == '__main__':
-    print(STATIC_PATH)
     start_server()
