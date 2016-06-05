@@ -46,6 +46,7 @@ class WebServerTest(TestRequest):
         self.assertIn('<!DOCTYPE html>', body)
 
 
+
 class TestRest(TestRequest):
     def version_test(self):
         resp = self.fetch_json('/api/v1/version')
