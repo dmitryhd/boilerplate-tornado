@@ -16,9 +16,9 @@ class TestWebServer(unittest.TestCase):
         self.assertTrue(app)
 
 
-class RequestTest(AsyncHTTPTestCase):
+class TestRequest(AsyncHTTPTestCase):
     def setUp(self):
-        super(RequestTest, self).setUp()
+        super(TestRequest, self).setUp()
 
     def get_app(self):
         return server.get_app()
@@ -36,7 +36,7 @@ class RequestTest(AsyncHTTPTestCase):
         return json.loads(body)
 
 
-class WebServerTest(RequestTest):
+class WebServerTest(TestRequest):
     def static_test(self):
         resp = self.fetch('/static/style.css')
         self.assertEqual(resp.code, 200)
@@ -46,7 +46,7 @@ class WebServerTest(RequestTest):
         self.assertIn('<!DOCTYPE html>', body)
 
 
-class RestTest(RequestTest):
+class TestRest(TestRequest):
     def version_test(self):
         resp = self.fetch_json('/api/v1/version')
         self.assertEqual(resp['version'], '1.0')
