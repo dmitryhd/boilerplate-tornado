@@ -2,9 +2,9 @@ language: python
 python:
     - "3.4"
 before_install:
-    - pip install nose
-    - pip install coveralls
+    - pip install nose coveralls
 script:
     - nosetests
+    - coverage run --source=web_server setup.py test
 after_success:
     - coveralls
